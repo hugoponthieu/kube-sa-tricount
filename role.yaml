@@ -1,0 +1,24 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: tricount-role
+  namespace: tricount2
+rules:
+- apiGroups: ["*"]
+  resources: ["*"]
+  verbs: ["*"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: tricount-rolebinding
+  namespace: tricount2 
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: tricount-role 
+subjects:
+- namespace: tricount2
+  kind: ServiceAccount
+  name: tricount-service-account
